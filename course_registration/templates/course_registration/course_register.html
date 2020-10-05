@@ -1,0 +1,61 @@
+{% extends 'course_registration/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+<style>
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+.card {
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  background-color: #f1f1f1;
+  margin-top:40px;
+}
+h2{
+color: rgb(255, 255, 255);
+}
+</style>
+  </head>
+<h2>{{request.user}} has registered the following courses </h2>
+<div class="row">
+  {% for i in registered_course %}
+   <div class="col-sm-6">
+    <div class="card" style="margin-bottom:40px;">
+      <div class="card-body" >
+          <h5 class="card-title"><b><center>{{i.course.course_name}}</center></b></h5>
+        <p class="card-text">Duration: {{ i.course.course_validity}}weeks</p>
+        <p>fees :{{i.course.fees}}</p>
+          <p>Professor :{{i.course.professor}}</p>
+        <a href="{% url 'course_delete' pk=i.id %}" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</html>
+{% endblock content %}

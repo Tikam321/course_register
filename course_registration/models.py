@@ -10,6 +10,7 @@ class Course_Registration(models.Model):
     fees = models.IntegerField(default=None)
     timing = models.DateTimeField(default=None)
 
+cd ..
 
     def __str__(self):
         return self.course_name
